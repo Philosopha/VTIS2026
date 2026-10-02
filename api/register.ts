@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from 'zod';
-import { supabase } from '../lib/supabase';
-import { generateTicketPDF, type Registration } from '../lib/ticket';
-import { sendConfirmationEmail } from '../lib/email';
-import { cors } from '../lib/auth';
+import { supabase } from './_lib/supabase';
+import { generateTicketPDF, type Registration } from './_lib/ticket';
+import { sendConfirmationEmail } from './_lib/email';
+import { cors } from './_lib/auth';
 
 const Schema = z.object({
   firstName: z.string().min(1).max(80).trim(),

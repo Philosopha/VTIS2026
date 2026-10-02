@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { supabase } from '../../lib/supabase';
-import { requireAuth, cors } from '../../lib/auth';
-import type { Registration } from '../../lib/ticket';
+import { supabase } from '../_lib/supabase';
+import { requireAuth, cors } from '../_lib/auth';
+import type { Registration } from '../_lib/ticket';
 
 function toRow(r: Registration): string {
   const days = [r.day1 && 'Day1', r.day2 && 'Day2', r.day3 && 'Day3'].filter(Boolean).join('|');

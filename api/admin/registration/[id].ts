@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { supabase } from '../../../lib/supabase';
-import { requireAuth, cors } from '../../../lib/auth';
-import { generateTicketPDF, type Registration } from '../../../lib/ticket';
-import { sendConfirmationEmail } from '../../../lib/email';
+import { supabase } from '../../_lib/supabase';
+import { requireAuth, cors } from '../../_lib/auth';
+import { generateTicketPDF, type Registration } from '../../_lib/ticket';
+import { sendConfirmationEmail } from '../../_lib/email';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   cors(res);
