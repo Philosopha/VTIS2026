@@ -18,6 +18,8 @@ import { generateTicketPDF } from '../services/ticket';
 import { sendConfirmationEmail } from '../services/email';
 import type { Registration } from '../types';
 
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4000';
+
 export const registrationRouter = Router();
 
 // ── Validation schema ─────────────────────────────────────────────────────────
@@ -105,16 +107,21 @@ registrationRouter.post('/', async (req, res) => {
 
   // Async post-processing
   try {
-    const ticketPDF = await generateTicketPDF(reg);
+    // 4. Generate PDF (to confirm it works and mark ticket_generated)
+    await generateTicketPDF(reg);
 
-    // 5. Send email
-    const emailResult = await sendConfirmationEmail(reg, ticketPDF);
+    // Build the public ticket download URL
+    const ticketUrl = `${BACKEND_URL}/api/ticket/${encodeURIComponent(reg.registration_id)}`;
+
+    // 5. Send email with ticket link
+    const emailResult = await sendConfirmationEmail(reg, ticketUrl);
 
     // 6. Update status flags
     await supabase
       .from('registrations')
       .update({
         ticket_generated: true,
+        ticket_url:        ticketUrl,
         email_sent:        emailResult.success,
         email_sent_at:     emailResult.success ? new Date().toISOString() : null,
         email_error:       emailResult.error   ?? null,

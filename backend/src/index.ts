@@ -12,6 +12,7 @@ import { registrationRouter } from './routes/registration';
 import { adminRouter }        from './routes/admin';
 import { authRouter }         from './routes/auth';
 import { verifyRouter }       from './routes/verify';
+import { ticketRouter }       from './routes/ticket';
 
 const app  = express();
 const PORT = process.env.PORT || 4000;
@@ -50,6 +51,7 @@ app.use('/api/register', registrationLimiter, registrationRouter);
 app.use('/api/auth',     authRouter);
 app.use('/api/admin',    adminLimiter, adminRouter);
 app.use('/api/verify',   verifyRouter);
+app.use('/api/ticket',   ticketRouter);
 
 // ── Health check ──────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date().toISOString() }));
