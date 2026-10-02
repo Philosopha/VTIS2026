@@ -1,0 +1,119 @@
+[
+{"created":1790951645893,"date":1790951645893,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951645893701927078600000","text":"Running build in Washington, D.C., USA (East) – iad1","type":"stdout","serial":"1790951645893701927078600000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951645894,"date":1790951645894,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951645894701927078600000","text":"Build machine configuration: 2 cores, 8 GB","type":"stdout","serial":"1790951645894701927078600000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951646181,"date":1790951646181,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951646181701927078600000","text":"Cloning github.com/Philosopha/VTIS2026 (Branch: main, Commit: 5cd3339)","type":"stdout","serial":"1790951646181701927078600000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951647101,"date":1790951647101,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951647101701927078600000","text":"Cloning completed: 919.000ms","type":"stdout","serial":"1790951647101701927078600000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951647357,"date":1790951647357,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951647357701927078600000","text":"Restored build cache from previous deployment (2YBB3T1zBbiLuvFB2Bsg1HgQYCDR)","type":"stdout","serial":"1790951647357701927078600000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951647959,"date":1790951647959,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951647959467573359800000","text":"Running \"vercel build\"","type":"stdout","serial":"1790951647959467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951647973,"date":1790951647973,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951647973467573359800000","text":"Vercel CLI 62.1.0","type":"stderr","serial":"1790951647973467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951650505,"date":1790951650505,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951650505467573359800000","text":"Installing dependencies...","type":"stdout","serial":"1790951650505467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671369,"date":1790951671369,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671369467573359800000","text":"","type":"stdout","serial":"1790951671369467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671370,"date":1790951671370,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671370467573359800000","text":"up to date in 19s","type":"stdout","serial":"1790951671370467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671370,"date":1790951671370,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671370467573359800001","text":"","type":"stdout","serial":"1790951671370467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671370,"date":1790951671370,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671370467573359800002","text":"83 packages are looking for funding","type":"stdout","serial":"1790951671370467573359800002","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671371,"date":1790951671371,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671371467573359800000","text":"  run `npm fund` for details","type":"stdout","serial":"1790951671371467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671371,"date":1790951671371,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671371467573359800001","text":"npm warn install-scripts 1 package has install scripts not yet covered by allowScripts:","type":"stderr","serial":"1790951671371467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."},"level":"warning"}
+,
+{"created":1790951671371,"date":1790951671371,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671371467573359800002","text":"npm warn install-scripts   esbuild@0.14.47 (postinstall: node install.js)","type":"stderr","serial":"1790951671371467573359800002","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."},"level":"warning"}
+,
+{"created":1790951671372,"date":1790951671372,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671372467573359800000","text":"npm warn install-scripts","type":"stderr","serial":"1790951671372467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."},"level":"warning"}
+,
+{"created":1790951671372,"date":1790951671372,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671372467573359800001","text":"npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.","type":"stderr","serial":"1790951671372467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."},"level":"warning"}
+,
+{"created":1790951671706,"date":1790951671706,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671706467573359800000","text":"","type":"stdout","serial":"1790951671706467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671706,"date":1790951671706,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671706467573359800001","text":"> figma-make-app@1.0.0 build","type":"stdout","serial":"1790951671706467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671706,"date":1790951671706,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671706467573359800002","text":"> vite build","type":"stdout","serial":"1790951671706467573359800002","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951671707,"date":1790951671707,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951671707467573359800000","text":"","type":"stdout","serial":"1790951671707467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672284,"date":1790951672284,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672284467573359800000","text":"\u001b[33m(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:","type":"stderr","serial":"1790951672284467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672285,"date":1790951672285,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672285467573359800000","text":"  - `__dirname` (vite.config.ts:10:32). Use `import.meta.dirname` instead","type":"stderr","serial":"1790951672285467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672285,"date":1790951672285,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672285467573359800001","text":"Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\u001b[39m","type":"stderr","serial":"1790951672285467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."},"level":"warning"}
+,
+{"created":1790951672309,"date":1790951672309,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672309467573359800000","text":"\u001b[36mvite v8.3.2 \u001b[32mbuilding client environment for production...\u001b[36m\u001b[39m","type":"stdout","serial":"1790951672309467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672324,"date":1790951672324,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672324467573359800000","text":"transforming...","type":"stdout","serial":"1790951672324467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672885,"date":1790951672885,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672885467573359800000","text":"✓ 36 modules transformed.","type":"stdout","serial":"1790951672885467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951672972,"date":1790951672972,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951672972467573359800000","text":"rendering chunks...","type":"stdout","serial":"1790951672972467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673065,"date":1790951673065,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673065467573359800000","text":"computing gzip size...","type":"stdout","serial":"1790951673065467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673073,"date":1790951673073,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673073467573359800000","text":"dist/index.html                             2.53 kB │ gzip:  0.70 kB","type":"stdout","serial":"1790951673073467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800000","text":"dist/assets/vtis-logo-new-DvSw7H12.png     96.49 kB","type":"stdout","serial":"1790951673074467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800001","text":"dist/assets/vtis logo-mboYALoO.png        107.38 kB","type":"stdout","serial":"1790951673074467573359800001","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800002","text":"dist/assets/VTIS 14-C0BCL9NF.jpg          558.21 kB","type":"stdout","serial":"1790951673074467573359800002","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800003","text":"dist/assets/VTIS 11-Cvfa4Ove.jpg          580.55 kB","type":"stdout","serial":"1790951673074467573359800003","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800004","text":"dist/assets/VTIS 5-C34avFpR.JPG         1,186.87 kB","type":"stdout","serial":"1790951673074467573359800004","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800005","text":"dist/assets/VTIS 4-CF2XaR60.JPG         1,273.99 kB","type":"stdout","serial":"1790951673074467573359800005","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800006","text":"dist/assets/VTIS 1-Cf67uuvs.JPG         1,306.55 kB","type":"stdout","serial":"1790951673074467573359800006","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800007","text":"dist/assets/VTIS 9-BMDlGwPg.JPG         1,865.49 kB","type":"stdout","serial":"1790951673074467573359800007","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800008","text":"dist/assets/index-CCMLBc8M.css             35.95 kB │ gzip:  6.94 kB","type":"stdout","serial":"1790951673074467573359800008","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800009","text":"dist/assets/index-DIekbcsh.js             255.75 kB │ gzip: 78.23 kB","type":"stdout","serial":"1790951673074467573359800009","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673074,"date":1790951673074,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673074467573359800010","text":"","type":"stdout","serial":"1790951673074467573359800010","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673075,"date":1790951673075,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673075467573359800000","text":"\u001b[32m✓ built in 765ms\u001b[39m","type":"stdout","serial":"1790951673075467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951673566,"date":1790951673566,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951673566467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951673566467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951682856,"date":1790951682856,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951682856467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951682856467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951685283,"date":1790951685283,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951685283467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951685283467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951686496,"date":1790951686496,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951686496467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951686496467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951687310,"date":1790951687310,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951687310467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951687310467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951688152,"date":1790951688152,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951688152467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951688152467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951689302,"date":1790951689302,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951689302467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951689302467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951690188,"date":1790951690188,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951690188467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951690188467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951691100,"date":1790951691100,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951691100467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951691100467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951691199,"date":1790951691199,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951691199467573359800000","text":"Using TypeScript 5.9.3 (local user-provided)","type":"stdout","serial":"1790951691199467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951697390,"date":1790951697390,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951697390467573359800000","text":"Build Completed in /vercel/output [47s]","type":"stderr","serial":"1790951697390467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951697497,"date":1790951697497,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951697497467573359800000","text":"Deploying outputs...","type":"stdout","serial":"1790951697497467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951707756,"date":1790951707756,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951707756467573359800000","text":"Deployment completed","type":"stdout","serial":"1790951707756467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951707766,"date":1790951707766,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951707766467573359800000","text":"Creating build cache...","type":"stdout","serial":"1790951707766467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951718197,"date":1790951718197,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951718197467573359800002","text":"Created build cache: 10s","type":"stdout","serial":"1790951718197467573359800002","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951718197,"date":1790951718197,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951718197467573359800003","text":"Uploading build cache [55.70 MB]","type":"stdout","serial":"1790951718197467573359800003","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+,
+{"created":1790951719056,"date":1790951719056,"deploymentId":"dpl_65RobQPcJPvzo67eNWPC2V8pbiEL","id":"1790951719056467573359800000","text":"Build cache uploaded: 859.000ms","type":"stdout","serial":"1790951719056467573359800000","info":{"type":"build","name":"bld_5g7h66lkk","entrypoint":"."}}
+]
