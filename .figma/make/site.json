@@ -1,0 +1,10 @@
+{
+  "description": "Connect with innovators, students, and policymakers at the Volta Tech & Innovation Summit 2026 to explore technology, entrepreneurship, and networking opportunities.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

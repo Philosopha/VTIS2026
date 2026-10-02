@@ -1,0 +1,30 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:     #0b0f2e;
+  --ink2:    #151b3d;
+  --surface: #f5f6fa;
+  --surf2:   #eceef5;
+  --border:  #dde0ee;
+  --text:    #0b0f2e;
+  --muted:   #5c6284;
+  --white:   #ffffff;
+  --pink:    #e31564;
+  --blue:    #1a8fd1;
+  --gold:    #c47a0a;
+  --green:   #16a34a;
+  --red:     #dc2626;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--surface);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+input, select, textarea { font-family: inherit; }

@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* ── Core palette ─────────────────────────────────────────────────────────
+     White + deep blue-black system.
+     Use vtis-ink / vtis-ink2 wherever you need the deep blue-black tone.
+     vtis-dark / vtis-surface / vtis-surface2 are the white-side surfaces.
+  ───────────────────────────────────────────────────────────────────────── */
+
+  /* Deep blue-black — primary text, buttons, navbar, footer */
+  --color-vtis-ink:      #0b0f2e;
+  /* Slightly softer blue-black — card accents, secondary dark elements */
+  --color-vtis-ink2:     #151b3d;
+
+  /* White-side surfaces */
+  --color-vtis-dark:     #ffffff;        /* main page background            */
+  --color-vtis-surface:  #f5f6fa;        /* alternating section backgrounds */
+  --color-vtis-surface2: #eceef5;        /* card backgrounds                */
+  --color-vtis-border:   #dde0ee;        /* borders and dividers            */
+
+  /* Typography */
+  --color-vtis-text:     #0b0f2e;        /* primary — same as ink           */
+  --color-vtis-muted:    #5c6284;        /* secondary / captions            */
+
+  /* Brand accents — unchanged */
+  --color-vtis-pink:     #e31564;
+  --color-vtis-blue:     #1a8fd1;        /* slightly deepened for light bg  */
+  --color-vtis-gold:     #c47a0a;        /* slightly deepened for light bg  */
+
+  --font-family-display: 'Space Grotesk', sans-serif;
+  --font-family-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Space Grotesk', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #ffffff;
+  color: #0b0f2e;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f6fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #dde0ee;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0b0f2e;
+}
+
+/* ── Scroll-triggered animation utilities ─────────────────────────────────────
+   Usage: add `animate-on-scroll` to any element.
+   The useInView hook (src/hooks/useInView.ts) adds `in-view` when the element
+   enters the viewport, triggering the appropriate keyframe.
+   Stagger children with `[--delay:Xms]` custom property helpers below.
+────────────────────────────────────────────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+/* Base hidden state — set before JS attaches IntersectionObserver */
+.anim {
+  opacity: 0;
+}
+
+/* Triggered state — added by useInView when element enters viewport */
+.anim.in-view {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.7s;
+}
+
+.anim.fade-up.in-view         { animation-name: fade-up;         }
+.anim.fade-in.in-view         { animation-name: fade-in;         }
+.anim.slide-left.in-view      { animation-name: slide-in-left;   }
+.anim.slide-right.in-view     { animation-name: slide-in-right;  }
+.anim.scale-in.in-view        { animation-name: scale-in;        }
+
+/* Delay helpers — apply as className="anim fade-up delay-1" etc. */
+.anim.delay-1.in-view { animation-delay: 100ms; }
+.anim.delay-2.in-view { animation-delay: 200ms; }
+.anim.delay-3.in-view { animation-delay: 300ms; }
+.anim.delay-4.in-view { animation-delay: 400ms; }
+.anim.delay-5.in-view { animation-delay: 500ms; }
+.anim.delay-6.in-view { animation-delay: 600ms; }
+
+/* Respect prefers-reduced-motion — skip animation, just show the element */
+@media (prefers-reduced-motion: reduce) {
+  .anim { opacity: 1 !important; animation: none !important; }
+}
