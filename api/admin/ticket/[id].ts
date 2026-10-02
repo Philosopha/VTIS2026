@@ -1,9 +1,7 @@
-// GET /api/admin/ticket/:id — download PDF ticket
-
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { supabase } from '../../_lib/supabase';
-import { requireAuth, cors } from '../../_lib/auth';
-import { generateTicketPDF, type Registration } from '../../_lib/ticket';
+import { supabase } from '../../../lib/supabase';
+import { requireAuth, cors } from '../../../lib/auth';
+import { generateTicketPDF, type Registration } from '../../../lib/ticket';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   cors(res);
@@ -16,11 +14,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const pdf = await generateTicketPDF(data as Registration);
-    const filename = `VTIS-2026-Ticket-${id.replace(' ', '-')}.pdf`;
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Disposition', `attachment; filename="VTIS-2026-Ticket-${id.replace(' ', '-')}.pdf"`);
     return res.send(pdf);
-  } catch (err) {
-    return res.status(500).json({ error: String(err) });
-  }
+  } catch (err) { return res.status(500).json({ error: String(err) }); }
 }
