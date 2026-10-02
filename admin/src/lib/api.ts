@@ -109,16 +109,16 @@ export async function listRegistrations(params: ListParams = {}): Promise<Regist
 }
 
 export async function getRegistration(id: string): Promise<Registration> {
-  return request(`/api/admin/registrations/${id}`);
+  return request(`/api/admin/registration/${id}`);
 }
 
 export async function resendEmail(id: string): Promise<{ success: boolean; message?: string }> {
-  return request(`/api/admin/registrations/${id}/resend`, { method: 'POST' });
+  return request(`/api/admin/registration/${id}`, { method: 'POST' });
 }
 
 export function downloadTicketURL(id: string): string {
   const token = getToken();
-  return `${BASE}/api/admin/registrations/${id}/ticket?token=${token}`;
+  return `${BASE}/api/admin/ticket/${id}?token=${token}`;
 }
 
 export function exportCSVURL(params: Omit<ListParams, 'page' | 'limit'>): string {
@@ -150,5 +150,5 @@ export async function verifyTicket(id: string): Promise<VerifyResult> {
 }
 
 export async function checkInTicket(id: string): Promise<{ success?: boolean; message?: string; error?: string }> {
-  return request(`/api/verify/${encodeURIComponent(id)}/checkin`, { method: 'POST' });
+  return request(`/api/verify/${encodeURIComponent(id)}`, { method: 'POST' });
 }
