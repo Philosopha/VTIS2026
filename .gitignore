@@ -19,3 +19,13 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# Debug/temp files
+*.json.tmp
+alllogs.json
+deploy.json
+health_resp.txt
+health_headers.txt
+logs2.json
+response.txt
+runtime_logs.json
