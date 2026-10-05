@@ -25,9 +25,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const { firstName, lastName, email, profile, days } = parsed.data;
 
-  const { data: existing } = await supabase.from('registrations').select('registration_id').eq('email', email).maybeSingle();
-  if (existing) return res.status(409).json({ error: 'duplicate_email', message: `This email is already registered (${existing.registration_id}).` });
+  // Duplicate check
+  const { data: existing } = await supabase
+    .from('registrations').select('registration_id').eq('email', email).maybeSingle();
+  if (existing) return res.status(409).json({
+    error: 'duplicate_email',
+    message: `This email is already registered (${existing.registration_id}).`,
+  });
 
+  // Insert registration
   const { data: newReg, error: insertError } = await supabase
     .from('registrations')
     .insert({ first_name: firstName, last_name: lastName, email, profile, day1: days.day1, day2: days.day2, day3: days.day3 })
@@ -39,19 +45,36 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({ error: 'Registration failed. Please try again.' });
   }
 
-  res.status(201).json({ success: true, registrationId: newReg.registration_id, message: `Registration confirmed! Your ID is ${newReg.registration_id}.` });
+  const reg = newReg as Registration;
+  const ticketUrl = `${process.env.BACKEND_URL || 'https://vtis-2026.vercel.app'}/api/ticket/${encodeURIComponent(reg.registration_id)}`;
 
+  // Generate ticket PDF and send email BEFORE responding (Vercel kills async work after res.json)
+  let emailSent = false;
+  let emailError: string | undefined;
   try {
-    const reg = newReg as Registration;
-    const ticketUrl = `${process.env.BACKEND_URL || 'https://vtis-2026.vercel.app'}/api/ticket/${encodeURIComponent(reg.registration_id)}`;
-    await generateTicketPDF(reg); // generate to confirm it works
+    await generateTicketPDF(reg);
     const emailResult = await sendConfirmationEmail(reg, ticketUrl);
-    await supabase.from('registrations').update({
-      ticket_generated: true,
-      ticket_url: ticketUrl,
-      email_sent: emailResult.success,
-      email_sent_at: emailResult.success ? new Date().toISOString() : null,
-      email_error: emailResult.error ?? null,
-    }).eq('id', reg.id);
-  } catch (err) { console.error('[POST-REG ERROR]', err); }
+    emailSent  = emailResult.success;
+    emailError = emailResult.error;
+    console.log(`[EMAIL] ${emailSent ? 'sent' : 'failed'} for ${reg.registration_id}`);
+  } catch (err) {
+    emailError = err instanceof Error ? err.message : String(err);
+    console.error('[EMAIL ERROR]', emailError);
+  }
+
+  // Update DB with ticket and email status
+  await supabase.from('registrations').update({
+    ticket_generated: true,
+    ticket_url:       ticketUrl,
+    email_sent:       emailSent,
+    email_sent_at:    emailSent ? new Date().toISOString() : null,
+    email_error:      emailError ?? null,
+  }).eq('id', reg.id);
+
+  // Respond to client
+  return res.status(201).json({
+    success:        true,
+    registrationId: reg.registration_id,
+    message:        `Registration confirmed! Your ID is ${reg.registration_id}.`,
+  });
 }
