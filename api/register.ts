@@ -43,10 +43,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const reg = newReg as Registration;
-    const ticketPDF = await generateTicketPDF(reg);
-    const emailResult = await sendConfirmationEmail(reg, ticketPDF);
+    const ticketUrl = `${process.env.BACKEND_URL || 'https://vtis-2026.vercel.app'}/api/ticket/${encodeURIComponent(reg.registration_id)}`;
+    await generateTicketPDF(reg); // generate to confirm it works
+    const emailResult = await sendConfirmationEmail(reg, ticketUrl);
     await supabase.from('registrations').update({
-      ticket_generated: true, email_sent: emailResult.success,
+      ticket_generated: true,
+      ticket_url: ticketUrl,
+      email_sent: emailResult.success,
       email_sent_at: emailResult.success ? new Date().toISOString() : null,
       email_error: emailResult.error ?? null,
     }).eq('id', reg.id);

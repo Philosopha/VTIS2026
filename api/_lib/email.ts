@@ -1,8 +1,12 @@
-import { Resend } from 'resend';
+// ─────────────────────────────────────────────────────────────────────────────
+// api/_lib/email.ts — send VTIS confirmation email via Brevo (Vercel functions)
+// ─────────────────────────────────────────────────────────────────────────────
+
+import * as Brevo from '@getbrevo/brevo';
 import type { Registration } from './ticket';
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
-const FROM   = process.env.EMAIL_FROM || 'VTIS 2026 <noreply@yourdomain.com>';
+const FROM_NAME  = 'Volta Tech & Innovation Summit 2026';
+const FROM_EMAIL = 'voltatechinnovationsummit@gmail.com';
 
 function daysList(reg: Registration): string {
   const days: string[] = [];
@@ -12,64 +16,107 @@ function daysList(reg: Registration): string {
   return days.map(d => `<li>${d}</li>`).join('');
 }
 
+function buildHtml(reg: Registration, ticketUrl: string): string {
+  const name   = `${reg.first_name} ${reg.last_name}`;
+  const vtisId = reg.registration_id;
+
+  return `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VTIS 2026 Registration Confirmation</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f5f7fa;font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;">
+    <div style="max-width:600px;margin:40px auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+
+      <!-- Header -->
+      <div style="background:#111827;padding:35px 30px;text-align:center;">
+        <h1 style="margin:0;color:#ffffff;font-size:30px;">VTIS 2026</h1>
+        <p style="margin:10px 0 0;color:#d1d5db;font-size:15px;">Registration Confirmation</p>
+      </div>
+
+      <!-- Content -->
+      <div style="padding:35px 30px;">
+        <h2 style="margin-top:0;font-size:24px;">Congratulations, ${name}! 🎉</h2>
+        <p style="font-size:16px;line-height:1.7;color:#4b5563;">
+          Your registration for <strong>VTIS 2026</strong> has been successfully completed.
+        </p>
+        <p style="font-size:16px;line-height:1.7;color:#4b5563;">
+          Please keep your registration ID below safe. You may need it when attending the event.
+        </p>
+
+        <!-- VTIS ID -->
+        <div style="margin:30px 0;padding:20px;background:#f3f4f6;border-radius:10px;text-align:center;">
+          <p style="margin:0 0 8px;font-size:13px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;">
+            Your VTIS Registration ID
+          </p>
+          <h2 style="margin:0;font-size:28px;color:#111827;">${vtisId}</h2>
+        </div>
+
+        <!-- Details -->
+        <h3 style="font-size:18px;margin-bottom:12px;">Your Registration</h3>
+        <p style="margin:6px 0;font-size:15px;color:#4b5563;"><strong>Name:</strong> ${name}</p>
+        <p style="margin:6px 0;font-size:15px;color:#4b5563;"><strong>Email:</strong> ${reg.email}</p>
+        <p style="margin:6px 0;font-size:15px;color:#4b5563;"><strong>Profile:</strong> ${reg.profile}</p>
+
+        <!-- Days -->
+        <p style="margin:12px 0 4px;font-size:15px;color:#4b5563;"><strong>Days Attending:</strong></p>
+        <ul style="margin:0 0 20px;padding-left:20px;font-size:15px;color:#4b5563;line-height:1.8;">
+          ${daysList(reg)}
+        </ul>
+
+        <!-- Ticket button -->
+        <div style="margin:30px 0;text-align:center;">
+          <a href="${ticketUrl}" style="display:inline-block;padding:14px 28px;background:#111827;color:#ffffff;text-decoration:none;border-radius:8px;font-size:16px;font-weight:bold;">
+            View / Download Your Ticket
+          </a>
+        </div>
+
+        <p style="font-size:14px;line-height:1.6;color:#6b7280;">
+          Please save your ticket and have it available when attending VTIS 2026.
+        </p>
+        <p style="font-size:16px;line-height:1.6;margin-top:30px;">
+          We look forward to seeing you at <strong>VTIS 2026</strong>.
+        </p>
+        <p style="margin-bottom:0;font-size:15px;color:#4b5563;">
+          Best regards,<br /><strong>VTIS 2026 Team</strong>
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="padding:20px 30px;background:#f9fafb;text-align:center;color:#9ca3af;font-size:12px;">
+        © 2026 VTIS. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>`.trim();
+}
+
 export async function sendConfirmationEmail(
   reg: Registration,
-  ticketPDF: Buffer,
+  ticketUrl: string,
 ): Promise<{ success: boolean; error?: string }> {
-  const subject = `Congratulations! Your Registration is Confirmed — ${reg.registration_id}`;
+  const apiInstance = new Brevo.TransactionalEmailsApi();
+  apiInstance.setApiKey(
+    Brevo.TransactionalEmailsApiApiKeys.apiKey,
+    process.env.BREVO_API_KEY!,
+  );
 
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head>
-<body style="margin:0;padding:0;background:#f5f6fa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f6fa;padding:40px 0;">
-    <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(11,15,46,0.08);">
-        <tr><td style="background:#0b0f2e;padding:32px 40px;">
-          <p style="margin:0;color:#fff;font-size:24px;font-weight:700;">VTIS <span style="color:#c47a0a;">2026</span></p>
-          <p style="margin:6px 0 0;color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;">Volta Tech &amp; Innovation Summit</p>
-        </td></tr>
-        <tr><td style="padding:40px 40px 32px;">
-          <div style="background:#f5f6fa;border-radius:8px;padding:20px 24px;margin-bottom:28px;text-align:center;">
-            <p style="margin:0 0 4px;color:#5c6284;font-size:11px;letter-spacing:2px;text-transform:uppercase;">Your Registration ID</p>
-            <p style="margin:0;color:#0b0f2e;font-size:36px;font-weight:700;letter-spacing:-1px;">${reg.registration_id}</p>
-          </div>
-          <h1 style="margin:0 0 8px;color:#0b0f2e;font-size:26px;font-weight:700;">Congratulations, ${reg.first_name}! 🎉</h1>
-          <p style="margin:0 0 24px;color:#5c6284;font-size:16px;line-height:1.6;">Your registration for <strong>VTIS 2026</strong> has been successfully confirmed.</p>
-          <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #dde0ee;border-radius:8px;overflow:hidden;margin-bottom:28px;">
-            <tr style="background:#f5f6fa;"><td style="padding:12px 20px;color:#5c6284;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;width:140px;">Full Name</td><td style="padding:12px 20px;color:#0b0f2e;font-size:14px;font-weight:600;">${reg.first_name} ${reg.last_name}</td></tr>
-            <tr><td style="padding:12px 20px;color:#5c6284;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">Email</td><td style="padding:12px 20px;color:#0b0f2e;font-size:14px;">${reg.email}</td></tr>
-            <tr style="background:#f5f6fa;"><td style="padding:12px 20px;color:#5c6284;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">Profile</td><td style="padding:12px 20px;color:#0b0f2e;font-size:14px;">${reg.profile}</td></tr>
-            <tr><td style="padding:12px 20px;color:#5c6284;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;">Attending</td><td style="padding:12px 20px;"><ul style="margin:0;padding-left:18px;color:#0b0f2e;font-size:14px;line-height:1.8;">${daysList(reg)}</ul></td></tr>
-          </table>
-          <div style="background:#0b0f2e;border-radius:8px;padding:20px 24px;margin-bottom:28px;">
-            <p style="margin:0 0 6px;color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:2px;text-transform:uppercase;">Your Ticket</p>
-            <p style="margin:0;color:#fff;font-size:14px;line-height:1.6;">Your personalized PDF ticket is attached. Please bring it to the event for check-in.</p>
-          </div>
-          ${reg.day1 ? `<div style="background:#fff8e6;border:1px solid #f0d090;border-radius:8px;padding:16px 20px;margin-bottom:28px;"><p style="margin:0;color:#8a5e00;font-size:13px;line-height:1.6;"><strong>Day 1 Note:</strong> Attendance on Day 1 requires prior approval. Our team will contact you to confirm your seat.</p></div>` : ''}
-          <p style="margin:0;color:#5c6284;font-size:14px;line-height:1.6;">Questions? Contact <a href="mailto:info@vtis2026.com" style="color:#0b0f2e;font-weight:600;">info@vtis2026.com</a></p>
-        </td></tr>
-        <tr><td style="background:#f5f6fa;padding:24px 40px;border-top:1px solid #dde0ee;">
-          <p style="margin:0;color:#5c6284;font-size:12px;text-align:center;">© 2026 VTIS · Organised by <strong>Confluence</strong> · Ho, Volta Region, Ghana</p>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+  const sendSmtpEmail = new Brevo.SendSmtpEmail();
+  sendSmtpEmail.sender      = { name: FROM_NAME, email: FROM_EMAIL };
+  sendSmtpEmail.to          = [{ email: reg.email, name: `${reg.first_name} ${reg.last_name}` }];
+  sendSmtpEmail.subject     = `Congratulations! Your Registration is Confirmed — ${reg.registration_id}`;
+  sendSmtpEmail.htmlContent = buildHtml(reg, ticketUrl);
 
   try {
-    await resend.emails.send({
-      from: FROM, to: reg.email, subject, html,
-      attachments: [{
-        filename: `VTIS-2026-Ticket-${reg.registration_id.replace(' ', '-')}.pdf`,
-        content: ticketPDF.toString('base64'),
-      }],
-    });
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log('[BREVO] Email sent:', response.body);
     return { success: true };
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    console.error('[EMAIL ERROR]', message);
+    console.error('[BREVO EMAIL ERROR]', message);
     return { success: false, error: message };
   }
 }
