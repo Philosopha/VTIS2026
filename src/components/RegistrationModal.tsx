@@ -73,12 +73,12 @@ function SuccessState({
         ))}
       </div>
 
-      <button
+      <div
         onClick={onClose}
-        className="w-full py-3 text-sm font-semibold bg-vtis-ink text-white hover:bg-vtis-ink2 rounded-sm transition-colors"
+        className="w-full py-3 text-sm font-semibold bg-vtis-ink text-white hover:bg-vtis-ink2 rounded-md transition-colors cursor-pointer text-center"
       >
         Done
-      </button>
+      </div>
     </div>
   );
 }
@@ -172,7 +172,7 @@ export default function RegistrationModal({ onClose }: { onClose: () => void }) 
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-6"
       style={{ background: 'rgba(11,15,46,0.70)', backdropFilter: 'blur(8px)' }}
     >
-      <div className="relative w-full max-w-lg bg-white border border-vtis-border rounded-sm shadow-2xl shadow-vtis-ink/20 overflow-hidden">
+      <div className="relative w-full max-w-lg bg-white border border-vtis-border rounded-xl shadow-2xl shadow-vtis-ink/15 overflow-hidden">
 
         {/* Top accent bar */}
         <div className="h-1 flex">
@@ -320,7 +320,7 @@ export default function RegistrationModal({ onClose }: { onClose: () => void }) 
                 <button
                   type="submit"
                   disabled={!isValid || loading}
-                  className={`w-full py-3.5 text-sm font-semibold rounded-sm transition-all duration-200 ${
+                  className={`w-full py-3.5 text-sm font-semibold rounded-md transition-all duration-200 ${
                     isValid && !loading
                       ? 'bg-vtis-ink text-white hover:bg-vtis-ink2 shadow-lg shadow-vtis-ink/20'
                       : 'bg-vtis-surface border border-vtis-border text-vtis-muted cursor-not-allowed'

@@ -1,109 +1,165 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   Single source of truth. Every colour, font, and spacing value comes from here.
+   Never hardcode hex values in components — reference these tokens.
+───────────────────────────────────────────────────────────────────────────── */
 @theme {
-  /* ── Core palette ─────────────────────────────────────────────────────────
-     White + deep blue-black system.
-     Use vtis-ink / vtis-ink2 wherever you need the deep blue-black tone.
-     vtis-dark / vtis-surface / vtis-surface2 are the white-side surfaces.
-  ───────────────────────────────────────────────────────────────────────── */
-
-  /* Deep blue-black — primary text, buttons, navbar, footer */
+  /* ── Colour palette ────────────────────────────────────────────────────── */
+  /* Ink (deep blue-black) — primary text, navbar, dark cards, footer photo overlay */
   --color-vtis-ink:      #0b0f2e;
-  /* Slightly softer blue-black — card accents, secondary dark elements */
   --color-vtis-ink2:     #151b3d;
 
-  /* White-side surfaces */
-  --color-vtis-dark:     #ffffff;        /* main page background            */
-  --color-vtis-surface:  #f5f6fa;        /* alternating section backgrounds */
-  --color-vtis-surface2: #eceef5;        /* card backgrounds                */
-  --color-vtis-border:   #dde0ee;        /* borders and dividers            */
+  /* Surfaces — strict alternating rhythm: white → surface → surface2 → surface */
+  --color-vtis-dark:     #ffffff;
+  --color-vtis-surface:  #f5f6fa;
+  --color-vtis-surface2: #eceef5;
+
+  /* Borders */
+  --color-vtis-border:   #dde0ee;
 
   /* Typography */
-  --color-vtis-text:     #0b0f2e;        /* primary — same as ink           */
-  --color-vtis-muted:    #5c6284;        /* secondary / captions            */
+  --color-vtis-text:     #0b0f2e;
+  --color-vtis-muted:    #5c6284;
 
-  /* Brand accents — unchanged */
+  /* Brand accents — semantic use only:
+     pink  → urgency / CTA emphasis
+     blue  → information / links
+     gold  → prestige / Day 1 / VIP     */
   --color-vtis-pink:     #e31564;
-  --color-vtis-blue:     #1a8fd1;        /* slightly deepened for light bg  */
-  --color-vtis-gold:     #c47a0a;        /* slightly deepened for light bg  */
+  --color-vtis-blue:     #1a8fd1;
+  --color-vtis-gold:     #c47a0a;
 
+  /* ── Typography ────────────────────────────────────────────────────────── */
   --font-family-display: 'Space Grotesk', sans-serif;
-  --font-family-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Space Grotesk', sans-serif;
+  --font-family-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+                          'Segoe UI', 'Space Grotesk', sans-serif;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE RESET
+───────────────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background-color: #ffffff;
   color: #0b0f2e;
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', 'Space Grotesk', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text',
+               'Segoe UI', 'Space Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
+/* ─────────────────────────────────────────────────────────────────────────────
+   TYPOGRAPHY SCALE
+   Shared clamp() values — use these classes to keep all headings consistent.
+   h1: hero only
+   h2: section headings
+   h3: card headings
+───────────────────────────────────────────────────────────────────────────── */
+.type-hero    { font-size: clamp(2.8rem, 7vw,  5.5rem); line-height: 1.05; }
+.type-h2      { font-size: clamp(2rem,   4vw,  3.2rem); line-height: 1.1;  }
+.type-h3      { font-size: clamp(1.2rem, 2vw,  1.6rem); line-height: 1.2;  }
+.type-label   { font-size: 0.6875rem; font-weight: 600;
+                letter-spacing: 0.2em; text-transform: uppercase; }
+.type-body    { font-size: 1rem; line-height: 1.75; }
+.type-body-lg { font-size: 1.0625rem; line-height: 1.75; }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SECTION RHYTHM
+   All page sections use one of two padding classes:
+   .section-pad     → standard sections
+   .section-pad-sm  → compact sections (stats strip)
+───────────────────────────────────────────────────────────────────────────── */
+.section-pad    { padding-top: 6rem;  padding-bottom: 6rem;  }
+.section-pad-lg { padding-top: 7.5rem; padding-bottom: 7.5rem; }
+@media (min-width: 768px) {
+  .section-pad    { padding-top: 8rem;  padding-bottom: 8rem;  }
+  .section-pad-lg { padding-top: 10rem; padding-bottom: 10rem; }
 }
-::-webkit-scrollbar-track {
-  background: #f5f6fa;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUTTON SYSTEM
+   Two variants: primary (ink fill) + ghost (transparent)
+   Consistent border-radius, padding and transition across the whole site.
+───────────────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8125rem 2rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb {
-  background: #dde0ee;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
+.btn-primary {
   background: #0b0f2e;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(11, 15, 46, 0.25);
+}
+.btn-primary:hover {
+  background: #151b3d;
+  box-shadow: 0 6px 28px rgba(11, 15, 46, 0.35);
+}
+.btn-primary-light {
+  background: #ffffff;
+  color: #0b0f2e;
+  box-shadow: 0 4px 20px rgba(11, 15, 46, 0.18);
+}
+.btn-primary-light:hover {
+  background: #f5f6fa;
+  box-shadow: 0 6px 28px rgba(11, 15, 46, 0.28);
+}
+.btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.75);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  border-color: rgba(255,255,255,0.45);
 }
 
-/* ── Scroll-triggered animation utilities ─────────────────────────────────────
-   Usage: add `animate-on-scroll` to any element.
-   The useInView hook (src/hooks/useInView.ts) adds `in-view` when the element
-   enters the viewport, triggering the appropriate keyframe.
-   Stagger children with `[--delay:Xms]` custom property helpers below.
-────────────────────────────────────────────────────────────────────────────── */
-
+/* ─────────────────────────────────────────────────────────────────────────────
+   SCROLL-TRIGGERED ANIMATIONS
+───────────────────────────────────────────────────────────────────────────── */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0);    }
 }
-
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-
 @keyframes slide-in-left {
-  from { opacity: 0; transform: translateX(-32px); }
+  from { opacity: 0; transform: translateX(-28px); }
   to   { opacity: 1; transform: translateX(0);     }
 }
-
 @keyframes slide-in-right {
-  from { opacity: 0; transform: translateX(32px); }
+  from { opacity: 0; transform: translateX(28px); }
   to   { opacity: 1; transform: translateX(0);    }
 }
-
 @keyframes scale-in {
-  from { opacity: 0; transform: scale(0.94); }
+  from { opacity: 0; transform: scale(0.95); }
   to   { opacity: 1; transform: scale(1);    }
 }
 
-/* Base hidden state — set before JS attaches IntersectionObserver */
-.anim {
-  opacity: 0;
-}
+.anim { opacity: 0; }
 
-/* Triggered state — added by useInView when element enters viewport */
 .anim.in-view {
   animation-fill-mode: both;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  animation-duration: 0.7s;
+  animation-duration: 0.65s;
 }
 
 .anim.fade-up.in-view         { animation-name: fade-up;         }
@@ -112,15 +168,21 @@ body {
 .anim.slide-right.in-view     { animation-name: slide-in-right;  }
 .anim.scale-in.in-view        { animation-name: scale-in;        }
 
-/* Delay helpers — apply as className="anim fade-up delay-1" etc. */
-.anim.delay-1.in-view { animation-delay: 100ms; }
-.anim.delay-2.in-view { animation-delay: 200ms; }
-.anim.delay-3.in-view { animation-delay: 300ms; }
-.anim.delay-4.in-view { animation-delay: 400ms; }
-.anim.delay-5.in-view { animation-delay: 500ms; }
-.anim.delay-6.in-view { animation-delay: 600ms; }
+.anim.delay-1.in-view { animation-delay: 80ms;  }
+.anim.delay-2.in-view { animation-delay: 160ms; }
+.anim.delay-3.in-view { animation-delay: 240ms; }
+.anim.delay-4.in-view { animation-delay: 320ms; }
+.anim.delay-5.in-view { animation-delay: 400ms; }
+.anim.delay-6.in-view { animation-delay: 480ms; }
 
-/* Respect prefers-reduced-motion — skip animation, just show the element */
 @media (prefers-reduced-motion: reduce) {
   .anim { opacity: 1 !important; animation: none !important; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SCROLLBAR
+───────────────────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: #f5f6fa; }
+::-webkit-scrollbar-thumb { background: #dde0ee; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #0b0f2e; }
