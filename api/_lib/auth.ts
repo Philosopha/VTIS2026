@@ -8,13 +8,17 @@ export function requireAuth(
   req: VercelRequest,
   res: VercelResponse,
 ): JwtPayload | null {
+  // Accept token from Authorization header OR ?token= query param (needed for CSV download links)
   const header = req.headers.authorization;
-  if (!header?.startsWith('Bearer ')) {
+  const queryToken = typeof req.query.token === 'string' ? req.query.token : null;
+  const raw = header?.startsWith('Bearer ') ? header.slice(7) : queryToken;
+
+  if (!raw) {
     res.status(401).json({ error: 'Unauthorized' });
     return null;
   }
   try {
-    return jwt.verify(header.slice(7), process.env.JWT_SECRET!) as JwtPayload;
+    return jwt.verify(raw, process.env.JWT_SECRET!) as JwtPayload;
   } catch {
     res.status(401).json({ error: 'Invalid or expired token' });
     return null;

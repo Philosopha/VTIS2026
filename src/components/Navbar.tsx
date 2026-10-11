@@ -49,7 +49,7 @@ export default function Navbar({ onApply }: NavbarProps) {
           {NAV_LINKS.map((link) => (
             <a
               key={link}
-              href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+              href={link === 'Home' ? '#' : `#${link.toLowerCase().replace(/\s+/g, '-')}`}
               className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 tracking-wide"
             >
               {link}
@@ -87,7 +87,7 @@ export default function Navbar({ onApply }: NavbarProps) {
           {NAV_LINKS.map((link) => (
             <a
               key={link}
-              href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
+              href={link === 'Home' ? '#' : `#${link.toLowerCase().replace(/\s+/g, '-')}`}
               onClick={() => setMenuOpen(false)}
               className="text-base text-white/70 hover:text-white transition-colors py-1"
             >

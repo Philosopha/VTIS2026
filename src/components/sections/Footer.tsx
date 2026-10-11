@@ -49,10 +49,10 @@ export default function Footer({ onApply }: FooterProps) {
             VTIS <span className="text-vtis-gold">2026</span>
           </span>
           <div className="hidden md:flex items-center gap-6 text-sm text-white/60">
+            <a href="#"          className="hover:text-white transition-colors">Home</a>
             <a href="#about"     className="hover:text-white transition-colors">About</a>
             <a href="#why-attend" className="hover:text-white transition-colors">Why Attend</a>
             <a href="#programme" className="hover:text-white transition-colors">Programme</a>
-            <a href="#register"  className="hover:text-white transition-colors">Register</a>
           </div>
         </div>
 

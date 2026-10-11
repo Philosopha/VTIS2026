@@ -11,7 +11,7 @@ import type { FormState } from '../types';
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 /** Top-level navigation links. href is auto-derived as `#link.toLowerCase()` */
-export const NAV_LINKS = ['About', 'Why Attend', 'Programme', 'Register'] as const;
+export const NAV_LINKS = ['Home', 'About', 'Why Attend', 'Programme'] as const;
 
 // ── Registration Form ─────────────────────────────────────────────────────────
 
